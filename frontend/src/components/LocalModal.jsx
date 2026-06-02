@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import './LocalModal.css'
 

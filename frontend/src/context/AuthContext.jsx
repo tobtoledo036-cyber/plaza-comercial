@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [user, setUser]     = useState(null)
-  const [token, setToken]   = useState(() => localStorage.getItem('token'))
+  const [user, setUser] = useState(null)
+  const [token, setToken] = useState(() => localStorage.getItem('token'))
   const [loading, setLoading] = useState(true)
 
   // Inyectar token en todas las peticiones axios
@@ -17,37 +17,52 @@ export function AuthProvider({ children }) {
     }
   }, [token])
 
-  // Al cargar, verificar si el token sigue siendo válido
+  // Verificar sesión al cargar
   useEffect(() => {
     const verificar = async () => {
-      if (!token) { setLoading(false); return }
+      if (!token) {
+        setLoading(false)
+        return
+      }
+
       try {
         const res = await axios.get('/api/auth/me')
         setUser(res.data)
-      } catch {
+      } catch (error) {
         logout()
       } finally {
         setLoading(false)
       }
     }
+
     verificar()
-  }, [])
+  }, [token])
 
   const login = async (email, password) => {
     const res = await axios.post('/api/auth/login', { email, password })
     const { token: t, user: u } = res.data
+
     localStorage.setItem('token', t)
     setToken(t)
     setUser(u)
+
     return u
   }
 
   const register = async (nombre, email, password, telefono) => {
-    const res = await axios.post('/api/auth/register', { nombre, email, password, telefono })
+    const res = await axios.post('/api/auth/register', {
+      nombre,
+      email,
+      password,
+      telefono
+    })
+
     const { token: t, user: u } = res.data
+
     localStorage.setItem('token', t)
     setToken(t)
     setUser(u)
+
     return u
   }
 
