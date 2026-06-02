@@ -1,0 +1,464 @@
+.home {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(176, 38, 255, 0.3) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.main-title {
+  font-size: 5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #b026ff 0%, #ff006e 50%, #d896ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  text-shadow: 0 0 30px rgba(176, 38, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px rgba(176, 38, 255, 0.5)); }
+  to { filter: drop-shadow(0 0 20px rgba(176, 38, 255, 0.8)); }
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  color: var(--neon-purple-bright);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.plazas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2.5rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.plaza-card {
+  position: relative;
+  height: 350px;
+  border-radius: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-card);
+  border: 2px solid rgba(176, 38, 255, 0.3);
+  box-shadow: 
+    0 0 20px rgba(176, 38, 255, 0.2),
+    inset 0 0 20px rgba(176, 38, 255, 0.05);
+}
+
+.plaza-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(176, 38, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.plaza-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: var(--neon-purple);
+  box-shadow: 
+    0 0 40px rgba(176, 38, 255, 0.6),
+    0 0 80px rgba(176, 38, 255, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(176, 38, 255, 0.1);
+}
+
+.plaza-card:hover::before {
+  opacity: 1;
+}
+
+.plaza-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s ease;
+  opacity: 0;
+  filter: grayscale(0%) brightness(0.4);
+}
+
+.plaza-card.hovered .plaza-background {
+  opacity: 0.4;
+  filter: grayscale(0%) brightness(0.5);
+  transform: scale(1.1);
+}
+
+.plaza-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.plaza-logo h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  transition: all 0.4s ease;
+  color: var(--text-light);
+  text-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+  letter-spacing: 1px;
+}
+
+.plaza-card:hover .plaza-logo h2 {
+  color: var(--neon-purple-bright);
+  text-shadow: 
+    0 0 10px rgba(176, 38, 255, 1),
+    0 0 20px rgba(176, 38, 255, 0.8),
+    0 0 30px rgba(176, 38, 255, 0.6);
+}
+
+.plaza-card.hovered .plaza-logo h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.plaza-info {
+  animation: fadeIn 0.4s ease;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ubicacion {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--neon-purple-bright);
+  font-weight: 600;
+}
+
+.descripcion {
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.locales {
+  font-size: 1rem;
+  color: var(--neon-purple);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-ver {
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%);
+  color: white;
+  border: 2px solid var(--neon-purple);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 0 20px rgba(176, 38, 255, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ver::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-ver:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-ver:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 40px rgba(176, 38, 255, 0.8),
+    0 0 60px rgba(176, 38, 255, 0.5),
+    0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: var(--neon-purple-bright);
+}
+
+
+.btn-admin {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #b026ff 0%, #ff00ff 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(176, 38, 255, 0.3);
+  position: relative;
+  z-index: 10;
+  margin-top: 1rem;
+}
+
+.btn-admin:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(176, 38, 255, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE - MÓVILES Y TABLETS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .home {
+    padding: 1rem;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Desactivar animaciones pesadas en móvil */
+  .hero-section::before {
+    display: none;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+    animation: none; /* Sin animación glow */
+    text-shadow: none;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .btn-admin {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .plazas-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .plaza-card {
+    height: 280px;
+    border-radius: 16px;
+  }
+
+  /* En móvil, mostrar info sin hover */
+  .plaza-card {
+    background: linear-gradient(135deg, rgba(176, 38, 255, 0.1) 0%, transparent 100%), var(--bg-card);
+  }
+
+  .plaza-logo h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .plaza-info {
+    display: block;
+    animation: none;
+  }
+
+  .ubicacion {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .descripcion {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .locales {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-ver {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Desactivar efectos hover en móvil */
+  .plaza-card:hover {
+    transform: none;
+    box-shadow: 0 0 20px rgba(176, 38, 255, 0.2);
+  }
+
+  .btn-ver::before {
+    display: none;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .home {
+    padding: 0.5rem;
+  }
+
+  .hero-section {
+    padding: 1.5rem 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .plazas-grid {
+    padding: 0 0.5rem;
+    gap: 1rem;
+  }
+
+  .plaza-card {
+    height: 250px;
+  }
+
+  .plaza-logo h2 {
+    font-size: 1.4rem;
+  }
+
+  .plaza-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Optimizaciones de rendimiento para móviles */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Desactivar todas las animaciones pesadas */
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  @keyframes glow {
+    from { filter: none; }
+    to { filter: none; }
+  }
+
+  /* Simplificar transiciones */
+  .plaza-card,
+  .btn-ver,
+  .btn-admin {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.btn-logout-home {
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.4);
+  border-radius: 12px;
+  color: #f87171;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-logout-home:hover {
+  background: rgba(239,68,68,0.1);
+  border-color: #ef4444;
+}

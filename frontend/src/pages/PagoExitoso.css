@@ -1,0 +1,145 @@
+.pago-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg-black);
+}
+
+.pago-card {
+  background: var(--bg-card);
+  border-radius: 25px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  border: 2px solid rgba(176, 38, 255, 0.3);
+  box-shadow: 
+    0 0 40px rgba(176, 38, 255, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pago-card.success {
+  border-color: var(--success);
+  box-shadow: 
+    0 0 40px rgba(16, 185, 129, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pago-card.error {
+  border-color: var(--danger);
+  box-shadow: 
+    0 0 40px rgba(239, 68, 68, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pago-card.warning {
+  border-color: var(--warning);
+  box-shadow: 
+    0 0 40px rgba(59, 130, 246, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.pago-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #b026ff 0%, #ff006e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mensaje {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+}
+
+.detalles {
+  background: rgba(176, 38, 255, 0.05);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.detalle-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detalle-item:last-child {
+  border-bottom: none;
+}
+
+.detalle-item span {
+  color: var(--text-gray);
+}
+
+.detalle-item strong {
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+.detalle-item strong.vendido {
+  color: var(--danger);
+}
+
+.detalle-item strong.apartado {
+  color: var(--warning);
+}
+
+.redireccion {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-volver {
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%);
+  color: white;
+  border: 2px solid var(--neon-purple);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 30px rgba(176, 38, 255, 0.5);
+}
+
+.btn-volver:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(176, 38, 255, 0.8);
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(176, 38, 255, 0.2);
+  border-top-color: #b026ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

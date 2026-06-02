@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: plazas_db
+    environment:
+      POSTGRES_DB: plazas_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - plazas_network
+
+volumes:
+  postgres_data:
+
+networks:
+  plazas_network:
+    driver: bridge

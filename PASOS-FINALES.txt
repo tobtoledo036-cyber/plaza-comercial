@@ -1,0 +1,104 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║           🔧 SOLUCIÓN COMPLETA - 2 PASOS                       ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+❌ PROBLEMAS ACTUALES:
+   1. Plazas vacías (0 locales)
+   2. No puedes entrar con admin@plazas.com
+
+════════════════════════════════════════════════════════════════
+
+✅ PASO 1: POBLAR PLAZAS Y LOCALES (1 minuto)
+
+En pgAdmin Query Tool:
+
+1. Ctrl+A (seleccionar todo el texto)
+2. Delete (borrar)
+3. Ctrl+V (pegar - ya está en tu portapapeles)
+4. F5 (ejecutar)
+5. Espera a ver: "106 locales insertados"
+
+Esto insertará:
+  ✅ 5 plazas comerciales
+  ✅ 106 locales distribuidos
+  ✅ Precios de apartado calculados
+
+════════════════════════════════════════════════════════════════
+
+✅ PASO 2: ARREGLAR USUARIO ADMIN (30 segundos)
+
+El archivo ARREGLAR-ADMIN.sql ya está abierto en Notepad.
+
+En pgAdmin Query Tool:
+
+1. Copia TODO el contenido de ARREGLAR-ADMIN.sql
+2. Pégalo en pgAdmin Query Tool
+3. F5 (ejecutar)
+4. Verás: "Usuario admin creado"
+
+Esto hará:
+  ✅ Eliminar usuario admin anterior (si existe)
+  ✅ Crear nuevo usuario admin con hash correcto
+  ✅ Verificar que se creó correctamente
+
+════════════════════════════════════════════════════════════════
+
+🧪 PROBAR EL SISTEMA:
+
+1. Recarga la página del login (F5)
+
+2. Inicia sesión con:
+   Email:    admin@plazas.com
+   Password: Admin123!
+
+3. Deberías ver:
+   ✅ Dashboard de administrador
+   ✅ 4 gráficas con datos
+   ✅ Estadísticas de locales
+
+4. Vuelve al inicio y verás:
+   ✅ 5 plazas comerciales
+   ✅ Cada plaza con sus locales
+   ✅ Mapa con rectángulos de locales
+
+════════════════════════════════════════════════════════════════
+
+📊 DATOS QUE TENDRÁS:
+
+Plaza Satélite      → 24 locales
+Mundo E             → 20 locales
+Plaza Las Américas  → 22 locales
+Galerías Metepec    → 20 locales
+Plaza Sendero       → 20 locales
+                    ─────────────
+TOTAL               → 106 locales
+
+════════════════════════════════════════════════════════════════
+
+⏰ TIEMPO TOTAL: 2 minutos
+
+════════════════════════════════════════════════════════════════
+
+💡 NOTAS:
+
+• El SQL de plazas y locales ya está en tu portapapeles
+• El SQL para arreglar admin ya está abierto en Notepad
+• Ejecuta PASO 1 primero, luego PASO 2
+• Si algo falla, avísame y lo arreglamos
+
+════════════════════════════════════════════════════════════════
+
+🎉 DESPUÉS DE COMPLETAR:
+
+El sistema estará 100% funcional:
+  ✅ Login y registro
+  ✅ Dashboard de admin con gráficas
+  ✅ 5 plazas comerciales
+  ✅ 106 locales para comprar/apartar
+  ✅ Sistema de apartado
+  ✅ Generación de PDFs
+  ✅ Panel de cliente (Mi Cuenta)
+
+════════════════════════════════════════════════════════════════

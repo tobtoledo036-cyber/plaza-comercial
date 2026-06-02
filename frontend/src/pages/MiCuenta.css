@@ -1,0 +1,340 @@
+.cuenta-loading {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 100vh; gap: 1rem; color: #fff;
+}
+
+.cuenta-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.cuenta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  background: #111;
+  border-bottom: 1px solid rgba(176,38,255,0.2);
+  gap: 1rem;
+}
+
+.btn-back-cuenta {
+  background: transparent;
+  border: 1px solid rgba(176,38,255,0.4);
+  border-radius: 8px;
+  color: #b026ff;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-back-cuenta:hover { background: rgba(176,38,255,0.1); }
+
+.cuenta-title h1 { font-size: 1.4rem; font-weight: 700; }
+.cuenta-title p  { font-size: 0.85rem; color: #888; }
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.4);
+  border-radius: 8px;
+  color: #f87171;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-logout:hover { background: rgba(239,68,68,0.1); }
+
+.cuenta-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.seccion-titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+}
+
+/* Empty state */
+.cuenta-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.empty-icon { font-size: 4rem; margin-bottom: 1rem; }
+.cuenta-empty h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.cuenta-empty p  { color: #888; margin-bottom: 2rem; }
+.btn-explorar {
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #b026ff, #ff00ff);
+  border: none; border-radius: 10px;
+  color: #fff; font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-explorar:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(176,38,255,0.4); }
+
+/* Grid de locales */
+.locales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.local-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  transition: transform 0.2s;
+}
+.local-card:hover { transform: translateY(-4px); }
+.local-card.compra  { border-color: rgba(59,130,246,0.3); }
+.local-card.apartado{ border-color: rgba(176,38,255,0.3); }
+
+.local-badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.local-badge.compra  { background: rgba(59,130,246,0.2);  color: #60a5fa; }
+.local-badge.apartado{ background: rgba(176,38,255,0.2);  color: #c084fc; }
+
+.local-card-header { margin-bottom: 1rem; }
+.local-card-header h3 { font-size: 1.3rem; font-weight: 700; }
+.local-plaza { font-size: 0.85rem; color: #888; }
+
+.local-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.info-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.info-label { font-size: 0.75rem; color: #888; }
+.info-value { font-size: 0.95rem; font-weight: 600; }
+.info-value.pagado { color: #10b981; }
+
+/* Apartado info */
+.apartado-info {
+  background: rgba(176,38,255,0.07);
+  border: 1px solid rgba(176,38,255,0.2);
+  border-radius: 10px;
+  padding: 0.875rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.apartado-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #aaa;
+}
+.apartado-row strong { color: #fff; }
+.restante { color: #fbbf24; }
+.urgente  { color: #ef4444; }
+.dias-ok  { color: #10b981; }
+
+.vencimiento-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+.vencimiento-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #b026ff);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.local-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.fecha-trans { font-size: 0.78rem; color: #666; }
+
+.btn-pdf-local {
+  padding: 0.5rem 1rem;
+  background: rgba(176,38,255,0.15);
+  border: 1px solid rgba(176,38,255,0.4);
+  border-radius: 8px;
+  color: #b026ff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-pdf-local:hover { background: rgba(176,38,255,0.3); }
+
+@media (max-width: 640px) {
+  .cuenta-header { padding: 1rem; flex-wrap: wrap; }
+  .cuenta-content { padding: 1rem; }
+  .locales-grid { grid-template-columns: 1fr; }
+}
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(176,38,255,0.2);
+  border-top-color: #b026ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Tabs de Mi Cuenta ── */
+.cuenta-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: #111;
+}
+
+.cuenta-tab {
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #888;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cuenta-tab:hover { color: #ddd; }
+.cuenta-tab.active {
+  color: #b026ff;
+  border-bottom-color: #b026ff;
+}
+
+.tab-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Lista de solicitudes ── */
+.solicitudes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.solicitud-card {
+  background: #1a1a1a;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s;
+}
+.solicitud-card:hover { transform: translateY(-2px); }
+.solicitud-card.estado-pendiente  { border-color: rgba(251,191,36,0.25); }
+.solicitud-card.estado-aprobada   { border-color: rgba(16,185,129,0.25); }
+.solicitud-card.estado-rechazada  { border-color: rgba(239,68,68,0.25);  }
+
+.sol-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.sol-header h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.sol-giro { font-size: 0.85rem; color: #888; }
+
+.sol-badge {
+  padding: 0.3rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sol-meta {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sol-respuesta {
+  padding: 0.875rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+.sol-respuesta.aprobada  { background: rgba(16,185,129,0.08);  border: 1px solid rgba(16,185,129,0.2); }
+.sol-respuesta.rechazada { background: rgba(239,68,68,0.08);   border: 1px solid rgba(239,68,68,0.2);  }
+.sol-respuesta strong { display: block; margin-bottom: 0.3rem; color: #ccc; }
+.sol-respuesta p { color: #aaa; margin: 0; line-height: 1.5; }
+
+.sol-aviso {
+  font-size: 0.82rem;
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── Sección de pago PayPal ── */
+.pagar-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pagar-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #aaa;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.pagar-info strong { color: #10b981; font-size: 1rem; }
+.pagar-error { color: #f87171; font-size: 0.82rem; margin: 0; }
+
+.btn-pagar-paypal {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #0070ba, #003087);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.btn-pagar-paypal:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,112,186,0.4); }
+.btn-pagar-paypal:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }

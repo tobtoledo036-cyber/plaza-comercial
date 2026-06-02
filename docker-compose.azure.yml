@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ${ACR_NAME}.azurecr.io/plazas-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - plazas_network
+
+  backend:
+    image: ${ACR_NAME}.azurecr.io/plazas-backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - PAYPAL_MODE=sandbox
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+    networks:
+      - plazas_network
+
+networks:
+  plazas_network:
+    driver: bridge

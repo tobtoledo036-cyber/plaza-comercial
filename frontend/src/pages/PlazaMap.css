@@ -1,0 +1,407 @@
+.plaza-map-container {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+}
+
+.plaza-map-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+.map-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-back {
+  background: #1a1a1a;
+  color: #fff;
+  border: 2px solid #b026ff;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+  white-space: nowrap;
+}
+
+.btn-back:hover {
+  background: #b026ff;
+  transform: translateX(-8px);
+  box-shadow: 0 0 40px rgba(176, 38, 255, 0.7);
+}
+
+.header-info h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #b026ff 0%, #ff006e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
+}
+
+.header-info p {
+  color: #d896ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ── Leyenda ── */
+.legend {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 2rem;
+  background: #1a1a1a;
+  border-radius: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid rgba(176, 38, 255, 0.3);
+  box-shadow: 0 0 30px rgba(176, 38, 255, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.legend-color {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.legend-color.disponible { background: #10b981; box-shadow: 0 0 12px #10b981; }
+.legend-color.apartado   { background: #3b82f6; box-shadow: 0 0 12px #3b82f6; }
+.legend-color.vendido    { background: #ef4444; box-shadow: 0 0 12px #ef4444; }
+
+/* ── Overlay de animación ── */
+.zoom-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.zoom-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(176, 38, 255, 0.8);
+}
+
+.zoom-text strong {
+  color: #d896ff;
+}
+
+.zoom-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(176, 38, 255, 0.2);
+  border-top-color: #b026ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Mapa ── */
+.map-wrapper {
+  background: #1a1a1a;
+  border-radius: 25px;
+  padding: 1rem;
+  box-shadow:
+    0 0 40px rgba(176, 38, 255, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(176, 38, 255, 0.05);
+  border: 2px solid rgba(176, 38, 255, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #000 !important;
+  border-radius: 18px;
+}
+
+.leaflet-control-zoom a {
+  background: #1a1a1a !important;
+  color: #d896ff !important;
+  border-color: rgba(176, 38, 255, 0.5) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #b026ff !important;
+  color: #fff !important;
+}
+
+/* Tooltip de locales */
+.local-tooltip {
+  background: #1a1a1a !important;
+  border: 2px solid #b026ff !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  font-size: 0.85rem !important;
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.5) !important;
+  padding: 8px 12px !important;
+}
+
+.local-tooltip .tt-num {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #d896ff;
+  margin-bottom: 2px;
+}
+
+.local-tooltip .tt-info {
+  color: #ccc;
+  font-size: 0.82rem;
+}
+
+.local-tooltip::before {
+  border-top-color: #b026ff !important;
+}
+
+/* ── Error ── */
+.error-page,
+.loading-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 2rem;
+  color: #d896ff;
+  gap: 2rem;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(176, 38, 255, 0.2);
+  border-top-color: #b026ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE - MÓVILES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .plaza-map-container {
+    padding: 1rem;
+    min-height: 100vh;
+  }
+
+  .map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-back {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-info p {
+    font-size: 0.9rem;
+  }
+
+  .legend {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .legend-item {
+    font-size: 0.9rem;
+  }
+
+  .map-wrapper {
+    height: 60vh !important;
+    min-height: 400px;
+  }
+
+  .map-wrapper .leaflet-container {
+    height: 60vh !important;
+    min-height: 400px;
+    border-radius: 12px;
+  }
+
+  .zoom-overlay {
+    padding: 1rem;
+  }
+
+  .zoom-text {
+    font-size: 1rem;
+  }
+
+  .loading-page {
+    padding: 2rem 1rem;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Optimización para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .plaza-map-container {
+    padding: 0.5rem;
+  }
+
+  .map-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .header-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .legend {
+    padding: 0.75rem;
+  }
+
+  .map-wrapper {
+    height: 50vh !important;
+    min-height: 350px;
+  }
+
+  .map-wrapper .leaflet-container {
+    height: 50vh !important;
+    min-height: 350px;
+  }
+}
+
+/* Mejorar rendimiento en móviles */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .plaza-map-container::before {
+    display: none; /* Quitar efectos de fondo en móvil */
+  }
+
+  .leaflet-tile {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ── Selector de pisos ── */
+.piso-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.piso-tab {
+  padding: 0.5rem 1.5rem;
+  background: #1a1a1a;
+  border: 2px solid rgba(176,38,255,0.3);
+  border-radius: 50px;
+  color: #aaa;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.piso-tab:hover { border-color: #b026ff; color: #fff; }
+.piso-tab.active {
+  background: rgba(176,38,255,0.2);
+  border-color: #b026ff;
+  color: #d896ff;
+  box-shadow: 0 0 15px rgba(176,38,255,0.3);
+}
+
+/* ── Mensajes de carga / error del GeoJSON ── */
+.geojson-loading {
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.geojson-error {
+  text-align: center;
+  color: #f87171;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Piso en tooltip ── */
+.local-tooltip .tt-piso {
+  color: #b026ff;
+  font-size: 0.78rem;
+  margin-top: 3px;
+  font-weight: 600;
+}

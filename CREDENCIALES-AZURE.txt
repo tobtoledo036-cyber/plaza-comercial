@@ -1,0 +1,116 @@
+=================================================================
+CREDENCIALES DE AZURE - PROYECTO PLAZAS COMERCIALES
+=================================================================
+
+RESOURCE GROUP: plazas-rg-eastus
+LOCATION: eastus
+
+-----------------------------------------------------------------
+AZURE CONTAINER REGISTRY (ACR)
+-----------------------------------------------------------------
+Registry Name: plazasacr2024
+Login Server: plazasacr2024.azurecr.io
+Username: plazasacr2024
+Password: D4tgbOO2bANAh3EF9Gxu5bNwGLUGYy0h27NC9a5LYqq0UPOmbMgVJQQJ99CEACYeBjFEqg7NAAACAZCR5TqP
+Password2: 1aODlqWUS1YmAEz4M6ycMDfCCZJAP8yRrb2Qlt26cbtXfKUKn71zJQQJ99CEACYeBjFEqg7NAAACAZCR7xHk
+
+-----------------------------------------------------------------
+POSTGRESQL LOCAL
+-----------------------------------------------------------------
+Host: localhost (o tu IP pública para acceso desde Azure)
+Port: 5433
+Database: plazas_db
+User: postgres
+Password: postgres123
+
+-----------------------------------------------------------------
+PAYPAL SANDBOX
+-----------------------------------------------------------------
+Client ID: Ad1COovx9SuHgYUAJzO9m_7_fGRtrENyA3rfv1vpB1BGT11kvp07mG9Xn9tG7193vQ76QLJvNYxNWdRK
+Client Secret: EKlDtptwPrnxFFp9iTKlcpHtky6V-bR6jSNKmFXYYfgLN3H24Ai9cBQSR2PbOy6E1mza0rNsxVkRdM9x
+
+=================================================================
+PRÓXIMOS PASOS
+=================================================================
+
+1. REINICIAR DOCKER DESKTOP
+   - Clic derecho en el ícono de Docker → Restart
+   - Esperar a que Docker esté completamente iniciado
+
+2. LOGIN EN ACR
+   docker login plazasacr2024.azurecr.io -u plazasacr2024 -p D4tgbOO2bANAh3EF9Gxu5bNwGLUGYy0h27NC9a5LYqq0UPOmbMgVJQQJ99CEACYeBjFEqg7NAAACAZCR5TqP
+
+3. CONSTRUIR Y SUBIR BACKEND
+   cd backend
+   docker build -t plazasacr2024.azurecr.io/plazas-backend:latest .
+   docker push plazasacr2024.azurecr.io/plazas-backend:latest
+   cd ..
+
+4. CONSTRUIR Y SUBIR FRONTEND
+   cd frontend
+   docker build -t plazasacr2024.azurecr.io/plazas-frontend:latest .
+   docker push plazasacr2024.azurecr.io/plazas-frontend:latest
+   cd ..
+
+5. VERIFICAR IMÁGENES
+   az acr repository list --name plazasacr2024 --output table
+
+6. DESPLEGAR BACKEND EN AZURE
+   az container create \
+     --resource-group plazas-rg-eastus \
+     --name plazas-backend \
+     --image plazasacr2024.azurecr.io/plazas-backend:latest \
+     --registry-login-server plazasacr2024.azurecr.io \
+     --registry-username plazasacr2024 \
+     --registry-password "D4tgbOO2bANAh3EF9Gxu5bNwGLUGYy0h27NC9a5LYqq0UPOmbMgVJQQJ99CEACYeBjFEqg7NAAACAZCR5TqP" \
+     --dns-name-label plazas-backend-2024 \
+     --ports 5000 \
+     --cpu 1 \
+     --memory 1 \
+     --location eastus \
+     --environment-variables \
+       NODE_ENV=production \
+       PORT=5000 \
+       DB_HOST=localhost \
+       DB_PORT=5433 \
+       DB_NAME=plazas_db \
+       DB_USER=postgres \
+       DB_PASSWORD=postgres123 \
+       PAYPAL_MODE=sandbox \
+       PAYPAL_CLIENT_ID="Ad1COovx9SuHgYUAJzO9m_7_fGRtrENyA3rfv1vpB1BGT11kvp07mG9Xn9tG7193vQ76QLJvNYxNWdRK" \
+       PAYPAL_CLIENT_SECRET="EKlDtptwPrnxFFp9iTKlcpHtky6V-bR6jSNKmFXYYfgLN3H24Ai9cBQSR2PbOy6E1mza0rNsxVkRdM9x"
+
+7. DESPLEGAR FRONTEND EN AZURE
+   az container create \
+     --resource-group plazas-rg-eastus \
+     --name plazas-frontend \
+     --image plazasacr2024.azurecr.io/plazas-frontend:latest \
+     --registry-login-server plazasacr2024.azurecr.io \
+     --registry-username plazasacr2024 \
+     --registry-password "D4tgbOO2bANAh3EF9Gxu5bNwGLUGYy0h27NC9a5LYqq0UPOmbMgVJQQJ99CEACYeBjFEqg7NAAACAZCR5TqP" \
+     --dns-name-label plazas-frontend-2024 \
+     --ports 80 \
+     --cpu 1 \
+     --memory 1 \
+     --location eastus
+
+8. OBTENER URLS
+   az container show --resource-group plazas-rg-eastus --name plazas-backend --query ipAddress.fqdn -o tsv
+   az container show --resource-group plazas-rg-eastus --name plazas-frontend --query ipAddress.fqdn -o tsv
+
+=================================================================
+NOTA IMPORTANTE: BASE DE DATOS LOCAL
+=================================================================
+
+Como estás usando PostgreSQL local, los contenedores en Azure NO podrán
+conectarse a tu base de datos local (está en tu red privada).
+
+OPCIONES:
+A) Usar Neon.tech (base de datos PostgreSQL gratuita en la nube)
+B) Exponer tu PostgreSQL local con ngrok o similar (no recomendado)
+C) Solo desplegar frontend y mantener backend local
+
+RECOMENDACIÓN: Usa Neon.tech para tener todo en la nube.
+Ver guía: ALTERNATIVA-BD-GRATUITA.md
+
+=================================================================
